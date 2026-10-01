@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windy Git: every version of your work, kept safe</title>
+<meta name="description" content="Windy Git is the Windy family's home for code and projects: save points you can always go back to, automatic checks on every change, and encrypted backups every night.">
+<meta property="og:title" content="Windy Git">
+<meta property="og:description" content="Every version of your work, kept safe. The Windy family's home for code and projects.">
+<meta property="og:url" content="https://windygit.com/">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --bg:#f7f9fc; --bg2:#eef3f9; --card:#ffffff; --fg:#121826; --muted:#4a5568; --line:#d9e1ec;
+  --accent:#0e7c9b; --accent2:#2563eb; --live:#0f7b46; --livebg:#e3f6ec; --soon:#8a5a00; --soonbg:#fdf3dc;
+  --code:#0f172a; --codefg:#e2e8f0; --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1220; --bg2:#0f1a2e; --card:#111c31; --fg:#e8eef7; --muted:#9fb0c7; --line:#1f2e48;
+  --accent:#38bdf8; --accent2:#818cf8; --live:#4ade80; --livebg:#0f2a1c; --soon:#fbbf24; --soonbg:#2a2110;
+  --code:#060b16; --codefg:#dbe6f5; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}}
+:root[data-theme="dark"]{
+  --bg:#0b1220; --bg2:#0f1a2e; --card:#111c31; --fg:#e8eef7; --muted:#9fb0c7; --line:#1f2e48;
+  --accent:#38bdf8; --accent2:#818cf8; --live:#4ade80; --livebg:#0f2a1c; --soon:#fbbf24; --soonbg:#2a2110;
+  --code:#060b16; --codefg:#dbe6f5; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--fg);text-decoration:none;letter-spacing:-.01em}
+.brand svg{width:28px;height:28px}
+.nav nav{display:flex;gap:18px;margin-left:auto;align-items:center}
+.nav nav a{color:var(--muted);text-decoration:none;font-size:15px}
+.nav nav a:hover{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;transition:transform .12s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#04121c}}
+:root[data-theme="dark"] .btn.primary{color:#04121c}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:var(--card)}
+.nav .btn{padding:8px 14px}
+@media (max-width:760px){.nav nav a.hide-sm{display:none}}
+
+.hero{padding:84px 0 56px;background:radial-gradient(1200px 500px at 70% -10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%),radial-gradient(900px 400px at 0% 0%,color-mix(in srgb,var(--accent2) 12%,transparent),transparent 70%)}
+.pill{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--live)}
+h1{font-size:clamp(36px,6vw,62px);line-height:1.05;letter-spacing:-.03em;margin:20px 0 18px;max-width:14ch}
+.lede{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:60ch;margin:0 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.timeline{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.timeline h3{margin:0 0 4px;font-size:15px}
+.timeline p.small{margin:0 0 16px;color:var(--muted);font-size:14px}
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl:before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl li{position:relative;padding:0 0 14px 32px;font-size:15px}
+.tl li:last-child{padding-bottom:0}
+.tl li:before{content:"";position:absolute;left:3px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--accent)}
+.tl li.now:before{background:var(--accent)}
+.tl .t{color:var(--muted);font-size:13px;display:block}
+.tl .undo{font-size:12px;font-weight:600;color:var(--accent);margin-left:6px}
+
+section{padding:72px 0}
+section.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;color:var(--accent);margin:0 0 10px}
+h2{font-size:clamp(28px,3.6vw,40px);letter-spacing:-.02em;line-height:1.15;margin:0 0 14px;max-width:24ch}
+.sub{color:var(--muted);max-width:64ch;margin:0 0 36px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+.card h3{margin:10px 0 6px;font-size:18px;letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);font-size:15.5px}
+.ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.ico svg{width:22px;height:22px}
+.chip{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:6px}
+.chip.live{color:var(--live);background:var(--livebg)}
+.chip.soon{color:var(--soon);background:var(--soonbg)}
+.feat{display:flex;gap:14px;align-items:flex-start}
+.feat .card{flex:1}
+.term{background:var(--code);color:var(--codefg);border-radius:14px;padding:20px 22px;font:14px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto;box-shadow:var(--shadow);border:1px solid var(--line)}
+.term .c{color:#7f8ea3}.term .p{color:#38bdf8}.term .ok{color:#4ade80}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+ul.checks{list-style:none;padding:0;margin:0}
+ul.checks li{padding:10px 0 10px 30px;position:relative;border-bottom:1px solid var(--line);font-size:16px}
+ul.checks li:last-child{border-bottom:0}
+ul.checks li:before{content:"✓";position:absolute;left:4px;top:9px;color:var(--live);font-weight:800}
+.quote{font-size:clamp(20px,2.6vw,26px);line-height:1.4;letter-spacing:-.01em;max-width:40ch;margin:0}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";float:right;color:var(--muted);font-weight:400}
+details[open] summary:after{content:"–"}
+details p{color:var(--muted);margin:10px 0 0}
+footer{padding:44px 0 60px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+footer a{color:var(--muted)}
+.theme{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 9px;cursor:pointer;font:inherit;font-size:13px}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:color-mix(in srgb,var(--accent) 10%,transparent);padding:1px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Windy Git home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor" opacity=".08"/><path d="M9 9v14M9 13c0 4 14 2 14 7" stroke="#0e7c9b" stroke-width="2.4" stroke-linecap="round"/><circle cx="9" cy="9" r="2.6" fill="#0e7c9b"/><circle cx="9" cy="23" r="2.6" fill="#0e7c9b"/><circle cx="23" cy="20" r="2.6" fill="#2563eb"/></svg>
+      Windy Git
+    </a>
+    <nav aria-label="Main">
+      <a class="hide-sm" href="#idea">The idea</a>
+      <a class="hide-sm" href="#today">What it does</a>
+      <a class="hide-sm" href="#developers">Developers</a>
+      <a class="hide-sm" href="#faq">FAQ</a>
+      <a class="btn ghost" href="https://app.windygit.com/user/oauth2/windy">Sign in with Windy</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Live today for the Windy team · members only</span>
+      <h1>Every version of your work, kept safe.</h1>
+      <p class="lede">Windy Git is the Windy family's home for code and projects. Every change becomes a save point you can go back to. Every change gets checked automatically. And everything is backed up, encrypted, every night. It's where Windy itself is built.</p>
+      <div class="cta">
+        <a class="btn primary" href="#idea">New to this? Start here</a>
+        <a class="btn ghost" href="#developers">I'm a developer</a>
+      </div>
+    </div>
+    <aside class="timeline" aria-label="Example history of a project">
+      <h3>A project's history, kept forever</h3>
+      <p class="small">An example: every save point stays, so nothing is ever truly lost.</p>
+      <ol class="tl">
+        <li><span class="t">Monday 9:12</span>First draft of the recipe page</li>
+        <li><span class="t">Monday 14:40</span>Added photos and a printable version</li>
+        <li><span class="t">Tuesday 10:05</span>Grandma's notes on the gravy<span class="undo">↺ go back here</span></li>
+        <li><span class="t">Tuesday 18:31</span>Helper reorganized everything (oops)</li>
+        <li class="now"><span class="t">Now</span>Back to Tuesday 10:05, mistake undone</li>
+      </ol>
+    </aside>
+  </div>
+</section>
+
+<section id="idea">
+  <div class="wrap">
+    <p class="eyebrow">Never heard of Git? Here's the idea</p>
+    <h2>Think of it as a time machine for anything you build.</h2>
+    <p class="sub">Programmers have used this kind of tool for twenty years, because losing work hurts and mistakes happen. The idea is simple enough for anyone, and it matters more now that AI helpers make changes for us.</p>
+    <div class="grid g4">
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div><h3>Undo, forever</h3><p>Not just the last step. Any moment in a project's life, from day one, is a save point you can return to.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div><h3>A family album</h3><p>See every version side by side, who changed what, and when. Like a photo album of your work, with captions.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.3 7.2C13 9 15.5 9.5 15.6 11"/></svg></div><h3>Try ideas safely</h3><p>Copy a project into a side version, experiment freely, and only bring the changes back when they're good. The original never breaks.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>A safe deposit box</h3><p>Your work lives off your computer, copied and backed up. A broken laptop is an inconvenience, not a disaster.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">Why it matters more now</p>
+      <p class="quote">When an AI helper changes your work for you, you deserve to see exactly what it changed, and to undo it in one step.</p>
+    </div>
+    <div>
+      <p style="margin-top:0">That is the whole promise of save points. Windy Git keeps a clear record of every change: what changed, who or what changed it, and when. If a change was a mistake, you go back. Nothing is overwritten and nothing is quietly lost.</p>
+      <p class="note">This is how the Windy team works on Windy today: people and AI helpers both make changes, and every one of them is a reviewable, reversible save point.</p>
+    </div>
+  </div>
+</section>
+
+<section id="today">
+  <div class="wrap">
+    <p class="eyebrow">What Windy Git does today</p>
+    <h2>Only what is live. Nothing promised that isn't.</h2>
+    <p class="sub">Every item marked <span class="chip live">Live</span> is running in production right now. Things we haven't built yet are marked <span class="chip soon">Not yet</span>, further down.</p>
+    <div class="grid g3">
+      <div class="card"><span class="chip live">Live</span><h3>One Windy login</h3><p>Sign in with the same Windy account you use everywhere else. There's no separate password to forget, and no password form to attack.</p></div>
+      <div class="card"><span class="chip live">Live</span><h3>Automatic checks on every change</h3><p>Each change runs the project's tests on our own machines, and the result shows up as a green check or a red cross where the team works.</p></div>
+      <div class="card"><span class="chip live">Live</span><h3>Secrets stay secret</h3><p>A guard stops passwords and keys from slipping into code. When it catches one it shows only a short fingerprint, never the secret itself.</p></div>
+      <div class="card"><span class="chip live">Live</span><h3>Encrypted nightly backups</h3><p>Every project, plus the full history of discussions and reviews, is backed up encrypted every night. And we've proven a restore from that backup on a different machine.</p></div>
+      <div class="card"><span class="chip live">Live</span><h3>Always in step with GitHub</h3><p>Windy's projects are mirrored from GitHub within minutes, so there are always two independent copies.</p></div>
+      <div class="card"><span class="chip live">Live</span><h3>Checks run walled off</h3><p>Test jobs run in isolated containers that can reach the internet but never our internal network. A bad change can't wander off and touch anything else.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="developers" class="alt">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">For developers</p>
+      <h2>Private-repo CI that reports back to GitHub.</h2>
+      <p>Windy Git runs on open-source <a href="https://about.gitea.com/" rel="noopener">Gitea</a>, behind Windy single sign-on. Today it's the continuous-integration layer for every private Windy platform repo. You keep pushing to GitHub as usual; the verdicts come back to your pull request as commit statuses.</p>
+      <ul class="checks">
+        <li>GitHub → Windy Git sync every 5 minutes; same-repo PRs get mirror PRs automatically</li>
+        <li>Gitea Actions, GitHub-Actions-compatible workflow syntax, on self-hosted runners</li>
+        <li>Statuses posted as <code>windy-git/&lt;workflow&gt;/&lt;job&gt;</code> on PR heads and the default branch</li>
+        <li>Guards on every PR: <code>secret-guard</code> (blocks), <code>compute-guard</code>, <code>ci-hygiene</code></li>
+        <li>Fork PRs never run: untrusted code never reaches the runners</li>
+      </ul>
+    </div>
+    <div>
+      <div class="term" role="img" aria-label="Example: a pull request's status checks posted by Windy Git">
+<span class="c"># push to GitHub as always</span>
+<span class="p">$</span> git push origin my-feature
+<span class="c"># ...a few minutes later, on the PR:</span>
+<span class="ok">✓</span> windy-git/ci/test
+<span class="ok">✓</span> windy-git/ci/lint
+<span class="ok">✓</span> windy-git/secret-guard   OK: no secret-shaped strings added
+<span class="ok">✓</span> windy-git/compute-guard  OK: Windy Mind is the only door
+      </div>
+      <p class="note">Workflows use <code>runs-on: [self-hosted, linux, x64]</code>. Job containers have no Docker daemon by design, so image builds belong in the deploy step, not in CI.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Honest roadmap</p>
+    <h2>What isn't here yet.</h2>
+    <p class="sub">We'd rather tell you plainly than let a page imply it. None of these are live today.</p>
+    <div class="grid g2">
+      <div class="card"><span class="chip soon">Not yet</span><h3>Open sign-up for every Windy member</h3><p>Today Windy Git is for the Windy team. Opening it to all members comes later, with safety limits in place first.</p></div>
+      <div class="card"><span class="chip soon">Not yet</span><h3>Windy Git as your main home</h3><p>GitHub is still the original copy for Windy's own projects. Making Windy Git the primary home comes after launch, one project at a time.</p></div>
+      <div class="card"><span class="chip soon">Not yet</span><h3>One-click deploys</h3><p>Today, putting a change live is still a deliberate, manual step. Automatic deploys need separate, locked-down keys first.</p></div>
+      <div class="card"><span class="chip soon">Not yet</span><h3>Pricing</h3><p>There is no paid plan and no pricing. When there is, it'll be on this page before anyone is asked to pay.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Questions</p>
+    <h2>Fair questions, straight answers.</h2>
+    <div style="max-width:780px">
+      <details><summary>Is Windy Git the same as GitHub?</summary><p>No. GitHub is a separate company's service. Windy Git is the Windy family's own home for code, built on the open-source Gitea project and run on our own machines. Today it mirrors Windy's GitHub projects and runs their automatic checks.</p></details>
+      <details><summary>I'm not a programmer. Is this for me?</summary><p>Not yet, honestly. The idea (save points, history, safe experiments, backups) is useful for anyone, but today Windy Git is the Windy team's workshop. When it opens to members, we'll explain it on this page in plain language first.</p></details>
+      <details><summary>Can I sign up?</summary><p>Not yet. Sign-in works only for people who already have Windy Git access, using their Windy account. New sign-ups are closed until member access opens.</p></details>
+      <details><summary>Who can see a private project?</summary><p>Only the people given access to it. Private projects are not listed or visible to anyone else.</p></details>
+      <details><summary>What happens if a password ends up in code by accident?</summary><p>The secret guard flags it on the pull request before it's merged, showing only a fingerprint of the secret, never the secret. The team then removes it and changes the password.</p></details>
+      <details><summary>What does "Git" mean?</summary><p>Git is the free, open-source tool programmers use to keep the history of their work. Windy Git is a place to keep that history safely, together.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Windy Git · part of the <a href="https://windyword.ai/">Windy</a> family</div>
+    <nav aria-label="Footer">
+      <a href="https://app.windygit.com/user/oauth2/windy">Sign in</a>
+      <a href="https://status.windyword.ai/">Status</a>
+      <a href="https://windyword.ai/terms">Terms</a>
+      <a href="https://windyword.ai/privacy">Privacy</a>
+      <button class="theme" id="theme" type="button" aria-label="Toggle light or dark theme">◐ Theme</button>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var r=document.documentElement,b=document.getElementById('theme'),k='wg-theme';
+  try{var s=localStorage.getItem(k);if(s)r.setAttribute('data-theme',s);}catch(e){}
+  b.addEventListener('click',function(){
+    var dark=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+    var n=dark?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem(k,n);}catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Windy Git
+
+> Every version of your work, kept safe. Windy Git is the Windy family's home for code and projects: save points you can always go back to, automatic checks on every change, and encrypted backups every night.
+
+Windy Git is built on the open-source Gitea project and runs on Windy's own machines. Today it keeps copies of Windy's projects and runs their automatic checks. It is live today for the Windy team, members only; new sign-ups are closed until member access opens. There is no paid plan and no pricing.
+
+## Main links
+
+- [Windy Git](https://windygit.com/): what it is, what is live today, and what is not here yet
+- [Fair questions, straight answers](https://windygit.com/#faq): who it is for, sign-up, private projects
+- [Windy](https://windyword.ai/): the Windy family of apps
+- [Status](https://status.windyword.ai/): service status
+- [Terms](https://windyword.ai/terms) and [Privacy](https://windyword.ai/privacy)

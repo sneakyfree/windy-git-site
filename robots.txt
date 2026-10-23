@@ -1,2 +1,6 @@
 User-agent: *
 Allow: /
+
+# windygit.com is one public marketing page. Accounts, sign-in and repositories live on
+# app.windygit.com (its own host and its own robots.txt), never on this site.
+Sitemap: https://windygit.com/sitemap.xml

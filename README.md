@@ -14,8 +14,8 @@ Every "Live" card is verified in production; everything else is under "Not yet".
 
     export CLOUDFLARE_API_TOKEN=...   # lockbox-get CF_PAGES_DEPLOY_TOKEN <0600 file>, never echoed
     export CLOUDFLARE_ACCOUNT_ID=193b347aedeaafe35de0b5a534b2d9aa
-    npx wrangler@3 pages deploy . --project-name windygit --branch preview   # check the preview URL
-    npx wrangler@3 pages deploy . --project-name windygit --branch main      # production (Grant OK)
+    ./deploy.sh preview   # an ALLOWLIST of files only, never the repo root; check the preview URL
+    ./deploy.sh main      # production (Boss GO)
 
 Use **wrangler 3**. The windygit.com zone is on Cloudflare (Windy Cloud owns DNS); never touch mail records.
 

@@ -9,15 +9,17 @@ Grant's five gates before the big marketing push: (1) Grant and friends say "rea
 For this repo: windygit.com is live (Cloudflare Pages project windygit, apex and www). The copy stays honest and generic: nothing about internal hosts, addresses or keys. It shows no Windstorm Labs postal address today; if one is ever added it reads the Lehi line from windy-contracts registry/company.json.
 
 ## Now
-- Sat 2026-11-07 18:00: this catch-up TODO PR (coordinating lane 2026-11-06 23:57Z, Grant: "TODO.md is our culture"). Done when it is merged; reader any non-author lane, stamp from the coordinating lane.
-- Mon 2026-11-09 18:00: the Windy Git tile line on the board ("TILE Windy Git: label, badge, link, note TRUE" or what must change) and the same line here, the same turn. Check the tile's link goes to windygit.com and that the copy on the site matches what the tile says.
-- Wed 2026-11-11 18:00: the codon line and TODO lines for the Windy Fly vision (tracked in the windy-git TODO.md; nothing site-specific unless the plan names the site).
+Line standard (coordinating lane): `- [ ] what · OWNER · ADDED · DUE · STATUS · SOURCE`. Times are UTC.
+- [ ] This TODO.md merged to main · Windy Git · 2026-11-06 · Sat 2026-11-07 18:00 · PR #2 refreshed 11-07 to the line standard; needs a reader + stamp · coordinating lane 2026-11-06 23:57Z and TODO HEALTH 2026-11-07 13:38:38Z
+- [ ] Windy Git tile line on the board ("TILE Windy Git: label, badge, link, note TRUE" or what must change) + the same line here; the tile's link goes to windygit.com and the site copy matches the tile · Windy Git · 2026-11-06 · Mon 2026-11-09 18:00 · not started · coordinating lane 2026-11-06
+- [ ] Codon line and TODO lines for the Windy Fly vision (tracked in windy-git's TODO.md; nothing site-specific unless the plan names the site) · Windy Git · 2026-11-06 · Wed 2026-11-11 18:00 · not started · coordinating lane 2026-11-06
+- [ ] Delete the merged leftover branch seo/launch-2026-10-23 after its archive tag, on the coordinating lane's OK · Windy Git · 2026-11-04 · Fri 2026-11-13 · table ready · coordinating lane 2026-11-04
 
 ## Waiting on
-- A reader and a stamp on this PR (the coordinating lane stamps; any non-author lane reads).
+- [ ] A reader and a stamp on this PR · coordinating lane (stamp), any non-author lane (read) · 2026-11-06 · Sat 2026-11-07 18:00 · asked on the board · this lane 2026-11-06
 
 ## Later
-- Keep the page honest with what the forge does: update the copy when the sign-in guard and the queue-priority rule are described anywhere public. Only when those facts change.
+- [ ] Keep the page honest with what the forge does: update the copy when the sign-in guard, the queue-priority rule or the Gitea version are described anywhere public · Windy Git · 2026-11-04 · when those facts change · nothing to change today · this lane 2026-11-04
 
 ## Branches
 Computed 2026-11-04 from the GitHub branch list and each branch's PR.
